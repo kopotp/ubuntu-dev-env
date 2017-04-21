@@ -1,3 +1,6 @@
+##################################
+### NGINX + NGXPAGESPEED + SSL ###
+##################################
 sudo apt-get install libssl-dev
 
 bash <(curl -f -L -sS https://ngxpagespeed.com/install) \
@@ -25,13 +28,6 @@ WantedBy=multi-user.target
 EOL
 
 sudo apt-get update
-
-sudo ufw default deny incoming
-sudo ufw default allow outgoing
-sudo ufw allow 22
-sudo ufw allow 80
-sudo ufw allow 443
-sudo ufw enable
 
 cat >/usr/local/nginx/conf/nginx.conf <<EOL
 user www-data;
@@ -157,7 +153,82 @@ http {
 }
 EOL
 
+cd /
+mkdir webroot
+sudo chmod 777 webroot
+cd /webroot
+mkdir www
+chown -R www-data:www-data www
+
+cat >/webroot/www/index.php <<EOL
+<?php
+    phpinfo();
+EOL
+
 sudo service nginx start
 
+###########
+### UFW ###
+###########
+
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow 22
+sudo ufw allow 80
+sudo ufw allow 443
+sudo ufw enable
+
+###############
+### MONGODB ###
+###############
+
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
+echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+sudo service mongod start
+
+###############
+### PHP-FPM ###
+###############
+sudo apt-get install php-fpm php-mongodb
+
+#############
+### REDIS ###
+#############
+sudo apt-get update
+sudo apt-get install build-essential tcl
+cd /tmp
+curl -O http://download.redis.io/redis-stable.tar.gz
+tar xzvf redis-stable.tar.gz
+cd redis-stable
+make
+make test
+sudo make install
+sudo mkdir /etc/redis
+sudo cp /tmp/redis-stable/redis.conf /etc/redis
+
+
+
+########## sudo nano /etc/redis/redis.conf
+cat> /etc/systemd/system/redis.service <<EOL
+[Unit]
+Description=Redis In-Memory Data Store
+After=network.target
+
+[Service]
+User=redis
+Group=redis
+ExecStart=/usr/local/bin/redis-server /etc/redis/redis.conf
+ExecStop=/usr/local/bin/redis-cli shutdown
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOL
+
+
 exit;
+
+
 
