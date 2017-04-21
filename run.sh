@@ -1,3 +1,32 @@
+##################
+### LOCALE FIX ###
+##################
+export LC_ALL="en_US.UTF-8"
+apt-get install language-pack-ru
+
+sudo cat >/etc/default/locale <<EOL
+LANG="ru_RU.utf8"
+LANGUAGE="ru_RU:ru"
+LC_CTYPE="ru_RU.utf8"
+LC_NUMERIC="ru_RU.utf8"
+LC_TIME="ru_RU.utf8"
+LC_COLLATE=ru_RU.utf8
+LC_MONETARY="ru_RU.utf8"
+LC_MESSAGES=ru_RU.utf8
+LC_PAPER="ru_RU.utf8"
+LC_NAME="ru_RU.utf8"
+LC_ADDRESS="ru_RU.utf8"
+LC_TELEPHONE="ru_RU.utf8"
+LC_MEASUREMENT="ru_RU.utf8"
+LC_IDENTIFICATION="ru_RU.utf8"
+LC_ALL="ru_RU.utf8"
+EOL
+
+export LC_ALL="ru_RU.utf8"
+export LANG="ru_RU.utf8"
+
+###sudo update-locale LANG=ru_RU.UTF-8
+
 ##################################
 ### NGINX + NGXPAGESPEED + SSL ###
 ##################################
