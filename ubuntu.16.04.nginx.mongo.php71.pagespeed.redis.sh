@@ -33,7 +33,7 @@ sudo ufw allow 80
 sudo ufw allow 443
 sudo ufw enable
 
-cat >/usr/local/nignx/conf/nginx.conf <<EOL
+cat >/usr/local/nginx/conf/nginx.conf <<EOL
 user www-data;
 worker_processes auto;
 pid /run/nginx.pid;
