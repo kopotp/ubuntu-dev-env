@@ -1,7 +1,7 @@
 ##################
 ### LOCALE FIX ###
 ##################
-export LC_ALL="en_US.UTF-8"
+sudo export LC_ALL="en_US.UTF-8"
 #apt-get install language-pack-ru
 
 sudo cat >/etc/default/locale <<EOL
@@ -29,7 +29,7 @@ EOL
 ##################################
 sudo apt-get install -y libssl-dev unzip libpcre3-dev
 
-yes | bash <(curl -f -L -sS https://ngxpagespeed.com/install) \
+sudo yes | sudo bash <(curl -f -L -sS https://ngxpagespeed.com/install) \
      --nginx-version 1.12.0 -y -a '--with-http_ssl_module --with-http_gzip_static_module --with-http_gunzip_module --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --with-stream --with-stream_ssl_module --with-mail --with-mail_ssl_module --with-threads --without-http_browser_module --without-http_geo_module --without-http_limit_req_module --without-http_referer_module --without-http_scgi_module --without-http_split_clients_module --without-http_ssi_module --without-http_userid_module --without-http_uwsgi_module'
 
 sudo cp ~/nginx-1.12.0/objs/nginx /usr/sbin/nginx
@@ -58,13 +58,8 @@ sudo apt-get update
 sudo wget -O /usr/local/nginx/conf/nginx.conf https://raw.githubusercontent.com/pashakopot/ubuntu-dev-env/master/nginx.conf
 
 cd /
-mkdir webroot
+sudo mkdir webroot
 sudo chmod 777 webroot
-
-sudo cat >/webroot/www/index.php <<EOL
-<?php
-    phpinfo();
-EOL
 
 ###############
 ### MONGODB ###
@@ -88,10 +83,10 @@ sudo service php7.0-fpm restart
 ################
 
 cd /tmp
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php -r "if (hash_file('SHA384', 'composer-setup.php') === '669656bab3166a7aff8a7506b8cb2d1c292f042046c5a994c43155c0be6190fa0355160742ab2e1c88d40d5be660b410') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+sudo php -r "if (hash_file('SHA384', 'composer-setup.php') === '669656bab3166a7aff8a7506b8cb2d1c292f042046c5a994c43155c0be6190fa0355160742ab2e1c88d40d5be660b410') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 sudo php composer-setup.php --install-dir=/usr/sbin --filename=composer
-php -r "unlink('composer-setup.php');"
+sudo php -r "unlink('composer-setup.php');"
 
 ###############
 ### LARAVEL ###
@@ -99,7 +94,7 @@ php -r "unlink('composer-setup.php');"
 sudo composer global require "laravel/installer"
 cd /webroot
 sudo ~/.composer/vendor/bin/laravel new laravel
-chown -R www-data:www-data laravel
+sudo chown -R www-data:www-data laravel
 
 
 
@@ -125,8 +120,8 @@ sudo ufw --force enable
 sudo apt-get update
 sudo apt-get install -y build-essential tcl
 cd /tmp
-curl -O http://download.redis.io/redis-stable.tar.gz
-tar xzvf redis-stable.tar.gz
+sudo curl -O http://download.redis.io/redis-stable.tar.gz
+sudo tar xzvf redis-stable.tar.gz
 cd redis-stable
 sudo make
 sudo make test
