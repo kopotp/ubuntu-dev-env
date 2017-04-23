@@ -80,7 +80,7 @@ sudo service mongod start
 ###############
 ### PHP-FPM ###
 ###############
-sudo apt-get install -y php-fpm php-mongodb
+sudo apt-get install -y php-fpm php-mongodb php-zip php-dom php-mbstring
 sudo service php7.0-fpm restart
 
 ################
@@ -98,7 +98,7 @@ php -r "unlink('composer-setup.php');"
 ###############
 sudo composer global require "laravel/installer"
 cd /webroot
-laravel new blog
+sudo ~/.composer/vendor/bin/laravel new laravel
 chown -R www-data:www-data laravel
 
 
