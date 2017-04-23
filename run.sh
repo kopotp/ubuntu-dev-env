@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 ##################
 ### LOCALE FIX ###
 ##################
@@ -75,7 +76,7 @@ sudo service mongod start
 ###############
 ### PHP-FPM ###
 ###############
-sudo apt-get install -y php-fpm php-mongodb php-zip php-dom php-mbstring
+sudo apt-get install -y php-fpm php-mongodb php-zip php-dom php-mbstring php-curl php-gd php-mcrypt
 sudo service php7.0-fpm restart
 
 ################
@@ -95,7 +96,9 @@ sudo composer global require "laravel/installer"
 cd /webroot
 sudo ~/.composer/vendor/bin/laravel new laravel
 sudo chown -R www-data:www-data laravel
-
+cd laravel
+sudo chmod -R 777 storage
+sudo chmod -R 777 bootstrap
 
 
 sudo systemctl enable nginx.service
