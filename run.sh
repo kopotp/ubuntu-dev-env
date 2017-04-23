@@ -55,7 +55,7 @@ EOL
 
 sudo apt-get update
 
-sudo wget -O /usr/local/nginx/conf/nginx.conf https://raw.githubusercontent.com/pashakopot/DO-ubuntu.16.04.nginx.mongo.php71.pagespeed.redis/master/nginx.conf
+sudo wget -O /usr/local/nginx/conf/nginx.conf https://raw.githubusercontent.com/pashakopot/ubuntu-dev-env/master/nginx.conf
 
 cd /
 mkdir webroot
@@ -133,7 +133,7 @@ sudo make test
 sudo make install
 sudo mkdir /etc/redis
 ### sudo cp /tmp/redis-stable/redis.conf /etc/redis
-sudo wget -O /etc/redis/redis.conf https://raw.githubusercontent.com/pashakopot/DO-ubuntu.16.04.nginx.mongo.php71.pagespeed.redis/master/redis.conf
+sudo wget -O /etc/redis/redis.conf https://raw.githubusercontent.com/pashakopot/ubuntu-dev-env/master/redis.conf
 
 sudo cat> /etc/systemd/system/redis.service <<EOL
 [Unit]

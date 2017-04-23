@@ -1,4 +1,4 @@
-# Digital Ocean Ubuntu 16.04.2 Dev Enviroment
+# Ubuntu Dev Env
 
 ## Description
 
