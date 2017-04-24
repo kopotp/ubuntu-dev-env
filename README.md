@@ -30,6 +30,15 @@ sudo mkswap /swapfile
 sudo swapon /swapfile
 
 sudo swapon -s
+free -m
+
+sudo nano /etc/fstab
+```
+
+At the bottom of the file, you need to add a line that will tell the operating system to automatically use the file you created:
+
+```
+/swapfile   none    swap    sw    0   0
 ```
 
 Rsync command
