@@ -28,7 +28,8 @@ EOL
 ##################################
 ### NGINX + NGXPAGESPEED + SSL ###
 ##################################
-sudo apt-get install -y libssl-dev unzip libpcre3-dev
+sudo apt-get update -y
+sudo apt-get install -y --fix-missing libssl-dev unzip libpcre3-dev
 
 yes | bash <(curl -f -L -sS https://ngxpagespeed.com/install) \
      --nginx-version 1.12.0 -y -a '--with-http_ssl_module --with-http_gzip_static_module --with-http_gunzip_module --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --with-stream --with-stream_ssl_module --with-mail --with-mail_ssl_module --with-threads --without-http_browser_module --without-http_geo_module --without-http_limit_req_module --without-http_referer_module --without-http_scgi_module --without-http_split_clients_module --without-http_ssi_module --without-http_userid_module --without-http_uwsgi_module'
