@@ -63,6 +63,9 @@ cd /
 sudo mkdir webroot
 sudo chmod 777 webroot
 
+sudo mkdir /var/ngx_pagespeed_cache
+sudo chmod 777 /var/ngx_pagespeed_cache
+
 ###############
 ### MONGODB ###
 ###############
