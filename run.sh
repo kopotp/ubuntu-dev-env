@@ -2,7 +2,7 @@
 ##################
 ### LOCALE FIX ###
 ##################
-sudo export LC_ALL="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
 #apt-get install language-pack-ru
 
 sudo cat >/etc/default/locale <<EOL
