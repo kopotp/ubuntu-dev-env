@@ -44,5 +44,6 @@ At the bottom of the file, you need to add a line that will tell the operating s
 Rsync command
 
 ```
-rsync -crvzpP -e 'ssh -i ~/.ssh/id_rsa' --links --delete --exclude '.git' --exclude 'public/img/uploads' --exclude 'helpers/cache' --exclude 'storage/logs' --exclude 'frontend/node_modules' --exclude 'fa/node_modules' ~/Desktop/projects/autoo.ru/web/ root@178.62.122.239:/webroot/laravel
+rsync -crvzpP -e 'ssh -i ~/.ssh/id_rsa' --links --delete --exclude '.git' --exclude 'public/img/uploads' --exclude 'helpers/cache' --exclude 'helpers/dataHeavy' --exclude 'storage/logs' --exclude 'frontend/node_modules' --exclude 'fa/node_modules' ~/Desktop/projects/autoo.ru/web/ root@178.62.125.13:/webroot/laravel
+
 ```

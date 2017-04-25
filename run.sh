@@ -80,7 +80,7 @@ sudo service mongod start
 ###############
 ### PHP-FPM ###
 ###############
-sudo apt-get install -y php-fpm php-mongodb php-zip php-dom php-mbstring php-curl php-gd php-mcrypt
+sudo apt-get install -y php-fpm php-mongodb php-zip php-dom php-mbstring php-curl php-mcrypt php-imagick
 sudo service php7.0-fpm restart
 
 ################
