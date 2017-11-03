@@ -62,6 +62,7 @@ sudo service mongod start
 ### PHP-FPM ###
 ###############
 sudo apt-get install -y php-fpm php-mongodb php-zip php-dom php-mbstring php-curl php-mcrypt
+rm /etc/php/7.0/fpm/conf.d/10-opcache.ini
 sudo service php7.0-fpm restart
 
 ################
