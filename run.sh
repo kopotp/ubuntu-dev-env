@@ -29,12 +29,8 @@ EOL
 ### NGINX + NGXPAGESPEED + SSL ###
 ##################################
 sudo apt-get update -y
-sudo apt-get install -y libssl-dev unzip libpcre3-dev
-
-yes | bash <(curl -f -L -sS https://ngxpagespeed.com/install) \
-     --nginx-version 1.12.0 -y -a '--with-http_ssl_module --with-http_gzip_static_module --with-http_gunzip_module --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --with-stream --with-stream_ssl_module --with-mail --with-mail_ssl_module --with-threads --without-http_browser_module --without-http_geo_module --without-http_limit_req_module --without-http_referer_module --without-http_scgi_module --without-http_split_clients_module --without-http_ssi_module --without-http_userid_module --without-http_uwsgi_module'
-
-sudo cp ~/nginx-1.12.0/objs/nginx /usr/sbin/nginx
+sudo apt-get install nginx -y
+sudo service nginx stop
 
 sudo cat >~/.htpasswd <<EOL
 tester:$apr1$bZu9Fn0U$sDgf6HeKYTa2T2nDlDkc.0
@@ -42,34 +38,13 @@ EOL
 
 sudo chmod 644 ~/.htpasswd
 
-sudo cat >/lib/systemd/system/nginx.service <<EOL
-[Unit]
-Description=The NGINX HTTP and reverse proxy server
-After=syslog.target network.target remote-fs.target nss-lookup.target
-
-[Service]
-Type=forking
-PIDFile=/run/nginx.pid
-ExecStartPre=/usr/sbin/nginx -t
-ExecStart=/usr/sbin/nginx
-ExecReload=/bin/kill -s HUP $MAINPID
-ExecStop=/bin/kill -s QUIT $MAINPID
-PrivateTmp=true
-
-[Install]
-WantedBy=multi-user.target
-EOL
-
-sudo apt-get update
-
-sudo wget -O /usr/local/nginx/conf/nginx.conf https://raw.githubusercontent.com/pashakopot/ubuntu-dev-env/master/nginx.conf
+sudo rm -rf /etc/nginx/nginx.conf
+sudo wget -O /etc/nginx/nginx.conf https://raw.githubusercontent.com/pashakopot/ubuntu-dev-env/master/nginx.conf
 
 cd /
 sudo mkdir webroot
 sudo chmod 777 webroot
 
-sudo mkdir /var/ngx_pagespeed_cache
-sudo chmod 777 /var/ngx_pagespeed_cache
 
 ###############
 ### MONGODB ###
@@ -85,7 +60,7 @@ sudo service mongod start
 ###############
 ### PHP-FPM ###
 ###############
-sudo apt-get install -y php-fpm php-mongodb php-zip php-dom php-mbstring php-curl php-mcrypt php-opcache
+sudo apt-get install -y php-fpm php-mongodb php-zip php-dom php-mbstring php-curl php-mcrypt php-imagick
 sudo service php7.0-fpm restart
 
 ################
@@ -111,7 +86,6 @@ sudo chmod -R 777 storage
 sudo chmod -R 777 bootstrap
 
 
-sudo systemctl enable nginx.service
 sudo service nginx start
 
 ###########
