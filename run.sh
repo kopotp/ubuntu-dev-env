@@ -36,6 +36,11 @@ yes | bash <(curl -f -L -sS https://ngxpagespeed.com/install) \
 
 sudo cp ~/nginx-1.12.0/objs/nginx /usr/sbin/nginx
 
+sudo cat >~/.htpasswd <<EOL
+tester:$apr1$bZu9Fn0U$sDgf6HeKYTa2T2nDlDkc.0
+EOL
+
+sudo chmod 644 ~/.htpasswd
 
 sudo cat >/lib/systemd/system/nginx.service <<EOL
 [Unit]
@@ -100,6 +105,7 @@ sudo composer global require "laravel/installer"
 cd /webroot
 sudo ~/.composer/vendor/bin/laravel new laravel
 sudo chown -R www-data:www-data laravel
+sudo chmod -R 777 laravel
 cd laravel
 sudo chmod -R 777 storage
 sudo chmod -R 777 bootstrap
@@ -171,6 +177,18 @@ sudo apt-get install -y nodejs
 sudo apt-get install -y npm
 
 sudo apt-get install htop
+
+######################
+### СЖАТИЕ ШАКАЛОВ ###
+######################
+
+sudo apt-get update
+sudo apt-get install imagemagick
+
+sudo apt-get update
+sudo apt-get install libjpeg-turbo-progs
+
+
 
 
 exit;
