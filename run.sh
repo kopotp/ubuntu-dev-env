@@ -32,12 +32,13 @@ sudo apt-get update -y
 sudo apt-get install nginx -y
 sudo service nginx stop
 
-sudo cat >~/.htpasswd <<EOL
-tester:$apr1$bZu9Fn0U$sDgf6HeKYTa2T2nDlDkc.0
+sudo cat >/etc/nginx/.htpasswd <<EOL
+tester:\$apr1\$keuCCNr4\$Z52j1u9fL1lCnGcG29ZJl.
 EOL
 
-sudo chmod 644 ~/.htpasswd
+sudo chmod 644 /etc/nginx/.htpasswd
 
+sudo cp /etc/nginx/nginx.conf /etc/nginx/nginxOld.conf
 sudo rm -rf /etc/nginx/nginx.conf
 sudo wget -O /etc/nginx/nginx.conf https://raw.githubusercontent.com/pashakopot/ubuntu-dev-env/master/nginx.conf
 
@@ -80,6 +81,8 @@ sudo chmod -R 777 laravel
 cd laravel
 sudo chmod -R 777 storage
 sudo chmod -R 777 bootstrap
+cp .env.example .env
+php artisan key:generate
 
 
 sudo service nginx start
@@ -152,15 +155,18 @@ sudo ufw --force enable
 ### СЖАТИЕ ШАКАЛОВ ###
 ######################
 
-sudo apt-get update
-sudo apt-get install imagemagick
+sudo apt-get update -y
+sudo apt-get install imagemagick -y
 
-sudo apt-get update
-sudo apt-get install libjpeg-turbo-progs
+sudo apt-get update -y
+sudo apt-get install libjpeg-turbo-progs -y
 
 
 
 exit;
+
+
+
 
 
 
