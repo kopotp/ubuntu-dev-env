@@ -26,7 +26,7 @@ EOL
 ###sudo update-locale LANG=ru_RU.UTF-8
 
 ##################################
-### NGINX + NGXPAGESPEED + SSL ###
+### NGINX  						###
 ##################################
 sudo apt-get update -y
 sudo apt-get install nginx -y
@@ -60,18 +60,14 @@ sudo service mongod start
 ###############
 ### PHP-FPM ###
 ###############
-sudo apt-get install -y php-fpm php-mongodb php-zip php-dom php-mbstring php-curl php-mcrypt php-imagick
+sudo apt-get install -y php-fpm php-mongodb php-zip php-dom php-mbstring php-curl php-mcrypt
 sudo service php7.0-fpm restart
 
 ################
 ### COMPOSER ###
 ################
 
-cd /tmp
-sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-sudo php -r "if (hash_file('SHA384', 'composer-setup.php') === '669656bab3166a7aff8a7506b8cb2d1c292f042046c5a994c43155c0be6190fa0355160742ab2e1c88d40d5be660b410') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-sudo php composer-setup.php --install-dir=/usr/sbin --filename=composer
-sudo php -r "unlink('composer-setup.php');"
+sudo apt-get install composer -y
 
 ###############
 ### LARAVEL ###
@@ -104,53 +100,53 @@ sudo ufw --force enable
 #############
 ### REDIS ###
 #############
-sudo apt-get update
-sudo apt-get install -y build-essential tcl
-cd /tmp
-sudo curl -O http://download.redis.io/redis-stable.tar.gz
-sudo tar xzvf redis-stable.tar.gz
-cd redis-stable
-sudo make
-sudo make test
-sudo make install
-sudo mkdir /etc/redis
-### sudo cp /tmp/redis-stable/redis.conf /etc/redis
-sudo wget -O /etc/redis/redis.conf https://raw.githubusercontent.com/pashakopot/ubuntu-dev-env/master/redis.conf
 
-sudo cat> /etc/systemd/system/redis.service <<EOL
-[Unit]
-Description=Redis In-Memory Data Store
-After=network.target
+# sudo apt-get update
+# sudo apt-get install -y build-essential tcl
+# cd /tmp
+# sudo curl -O http://download.redis.io/redis-stable.tar.gz
+# sudo tar xzvf redis-stable.tar.gz
+# cd redis-stable
+# sudo make
+# sudo make test
+# sudo make install
+# sudo mkdir /etc/redis
+# sudo wget -O /etc/redis/redis.conf https://raw.githubusercontent.com/pashakopot/ubuntu-dev-env/master/redis.conf
 
-[Service]
-User=redis
-Group=redis
-ExecStart=/usr/local/bin/redis-server /etc/redis/redis.conf
-ExecStop=/usr/local/bin/redis-cli shutdown
-Restart=always
+# sudo cat> /etc/systemd/system/redis.service <<EOL
+# [Unit]
+# Description=Redis In-Memory Data Store
+# After=network.target
 
-[Install]
-WantedBy=multi-user.target
-EOL
+# [Service]
+# User=redis
+# Group=redis
+# ExecStart=/usr/local/bin/redis-server /etc/redis/redis.conf
+# ExecStop=/usr/local/bin/redis-cli shutdown
+# Restart=always
 
-sudo adduser --system --group --no-create-home redis
-sudo mkdir /var/lib/redis
-sudo chown redis:redis /var/lib/redis
-sudo chmod 770 /var/lib/redis
+# [Install]
+# WantedBy=multi-user.target
+# EOL
 
-sudo systemctl start redis
-sudo systemctl enable redis
+# sudo adduser --system --group --no-create-home redis
+# sudo mkdir /var/lib/redis
+# sudo chown redis:redis /var/lib/redis
+# sudo chmod 770 /var/lib/redis
+
+# sudo systemctl start redis
+# sudo systemctl enable redis
 
 
 ####################
 ### NODEJS & NPM ###
 ####################
 
-sudo apt-get update
-sudo apt-get install -y nodejs
-sudo apt-get install -y npm
+# sudo apt-get update
+# sudo apt-get install -y nodejs
+# sudo apt-get install -y npm
 
-sudo apt-get install htop
+# sudo apt-get install htop
 
 ######################
 ### СЖАТИЕ ШАКАЛОВ ###
@@ -161,7 +157,6 @@ sudo apt-get install imagemagick
 
 sudo apt-get update
 sudo apt-get install libjpeg-turbo-progs
-
 
 
 
