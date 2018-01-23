@@ -3,7 +3,7 @@
 ## Description
 
 - Nginx + SSL + NGX-PageSpeed (from source)
-- PHP7.0-fpm + MongoDB Extension
+- PHP7.1-fpm + MongoDB Extension
 - MongoDB
 - Redis (from source)
 - Ufw for 22, 80, 443
