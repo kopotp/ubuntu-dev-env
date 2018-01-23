@@ -2,7 +2,7 @@
 
 ## Description
 
-- Nginx + SSL + NGX-PageSpeed (from source)
+- Nginx
 - PHP7.1-fpm + MongoDB Extension
 - MongoDB
 - Redis (from source)
@@ -11,6 +11,7 @@
 - NPM
 - Composer
 - Laravel
+- Image libs
 
 ## Installation
 Run this on fresh Digital Ocean Ubuntu 16.04.2 Droplet
