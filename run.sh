@@ -63,7 +63,7 @@ sudo service mongod start
 ###############
 sudo add-apt-repository ppa:ondrej/php
 sudo apt-get update
-sudo apt-get install -y php7.1-fpm php-mongodb php7.1-zip php7.1-xml php7.1-mbstring php7.1-curl php7.1-mcrypt php7.1-imap
+sudo apt-get install -y php7.1-fpm php7.1-mongodb php7.1-zip php7.1-xml php7.1-mbstring php7.1-curl php7.1-mcrypt php7.1-imap
 rm /etc/php/7.1/fpm/conf.d/10-opcache.ini
 sudo service php7.1-fpm restart
 
