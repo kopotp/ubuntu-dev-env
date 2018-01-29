@@ -95,7 +95,7 @@ mkdir laravel
 cd laravel
 mkdir public
 
-sudo cat >/etc/nginx/.htpasswd <<EOL
+sudo cat >/webroot/laravel/public/index.php <<EOL
 <?php
   phpinfo();
 EOL
