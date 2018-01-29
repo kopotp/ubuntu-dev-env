@@ -78,7 +78,7 @@ sudo apt-get install composer -y
 ###############
 sudo composer global require "laravel/installer"
 cd /webroot
-sudo ~/.composer/vendor/bin/laravel new laravel
+sudo ~/.composer/vendor/bin/laravel new laravel --force
 sudo chown -R www-data:www-data laravel
 sudo chmod -R 777 laravel
 cd laravel
