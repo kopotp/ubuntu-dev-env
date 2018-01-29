@@ -182,6 +182,6 @@ sudo apt-get update -y
 sudo apt-get install libjpeg-turbo-progs -y
 
 sudo apt-get update
-sudo apt-get install lame
+sudo apt-get install lame -y
 
 exit;
