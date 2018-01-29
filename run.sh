@@ -76,16 +76,31 @@ sudo apt-get install composer -y
 ###############
 ### LARAVEL ###
 ###############
-sudo composer global require "laravel/installer"
+
+#sudo composer global require "laravel/installer"
+#cd /webroot
+#sudo ~/.composer/vendor/bin/laravel new laravel --force
+#sudo chown -R www-data:www-data laravel
+#sudo chmod -R 777 laravel
+#cd laravel
+#sudo chmod -R 777 storage
+#sudo chmod -R 777 bootstrap
+#cp .env.example .env
+#php artisan key:generate
+
 cd /webroot
-sudo ~/.composer/vendor/bin/laravel new laravel --force
+mkdir laravel
+cd laravel
+mkdir public
+
+sudo cat >/etc/nginx/.htpasswd <<EOL
+<?php
+  phpinfo();
+EOL
+
+cd /webroot
 sudo chown -R www-data:www-data laravel
 sudo chmod -R 777 laravel
-cd laravel
-sudo chmod -R 777 storage
-sudo chmod -R 777 bootstrap
-cp .env.example .env
-php artisan key:generate
 
 
 sudo service nginx start
