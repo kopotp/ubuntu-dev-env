@@ -2,6 +2,8 @@
 ##################
 ### LOCALE FIX ###
 ##################
+export DEBIAN_FRONTEND=noninteractive
+
 export LC_ALL="en_US.UTF-8"
 #apt-get install language-pack-ru
 
@@ -179,6 +181,7 @@ sudo apt-get install imagemagick -y
 sudo apt-get update -y
 sudo apt-get install libjpeg-turbo-progs -y
 
-
+sudo apt-get update
+sudo apt-get install lame
 
 exit;
