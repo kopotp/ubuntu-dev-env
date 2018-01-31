@@ -101,21 +101,21 @@ sudo ufw allow 443
 #php artisan key:generate
 
 if [ ! -f '/webroot/laravel/public/index.php' ]; then
-    sudo ufw --force enable
+sudo ufw --force enable
     
-    cd /webroot
-    mkdir laravel
-    cd laravel
-    mkdir public
+cd /webroot
+mkdir laravel
+cd laravel
+mkdir public
 
-    sudo cat >/webroot/laravel/public/index.php <<EOL
-    <?php
-      phpinfo();
-    EOL
+sudo cat >/webroot/laravel/public/index.php <<EOL
+<?php
+    phpinfo();
+EOL
 
-    cd /webroot
-    sudo chown -R www-data:www-data laravel
-    sudo chmod -R 777 laravel
+cd /webroot
+sudo chown -R www-data:www-data laravel
+sudo chmod -R 777 laravel
 fi
 
 
