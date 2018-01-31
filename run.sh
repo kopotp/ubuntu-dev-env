@@ -27,9 +27,9 @@ EOL
 
 ###sudo update-locale LANG=ru_RU.UTF-8
 
-##################################
-### NGINX  						###
-##################################
+#############
+### NGINX ###
+#############
 sudo apt-get update -y
 sudo apt-get install nginx -y
 sudo service nginx stop
@@ -75,6 +75,16 @@ sudo service php7.1-fpm restart
 
 sudo apt-get install composer -y
 
+###########
+### UFW ###
+###########
+
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow 22
+sudo ufw allow 80
+sudo ufw allow 443
+
 ###############
 ### LARAVEL ###
 ###############
@@ -90,34 +100,26 @@ sudo apt-get install composer -y
 #cp .env.example .env
 #php artisan key:generate
 
-cd /webroot
-mkdir laravel
-cd laravel
-mkdir public
+if [ ! -f '/webroot/laravel/public/index.php' ]; then
+    sudo ufw --force enable
+    
+    cd /webroot
+    mkdir laravel
+    cd laravel
+    mkdir public
 
-sudo cat >/webroot/laravel/public/index.php <<EOL
-<?php
-  phpinfo();
-EOL
+    sudo cat >/webroot/laravel/public/index.php <<EOL
+    <?php
+      phpinfo();
+    EOL
 
-cd /webroot
-sudo chown -R www-data:www-data laravel
-sudo chmod -R 777 laravel
+    cd /webroot
+    sudo chown -R www-data:www-data laravel
+    sudo chmod -R 777 laravel
+fi
 
 
 sudo service nginx start
-
-###########
-### UFW ###
-###########
-
-sudo ufw default deny incoming
-sudo ufw default allow outgoing
-sudo ufw allow 22
-sudo ufw allow 80
-sudo ufw allow 443
-sudo ufw --force enable
-
 
 
 #############
@@ -183,5 +185,18 @@ sudo apt-get install libjpeg-turbo-progs -y
 
 sudo apt-get update
 sudo apt-get install lame -y
+
+
+################
+### SWAPFILE ###
+################
+
+sudo fallocate -l 4G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+echo 'vm.swappiness=10' | sudo tee -a /etc/sysctl.conf
+sudo sysctl vm.swappiness=10
 
 exit;
